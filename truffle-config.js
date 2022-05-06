@@ -1,5 +1,8 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 const HDWalletProvider = require("@truffle/hdwallet-provider");
-const mnemonic = require("./secret.json").secret;
+const mnemonic = process.env.ROPSTEN_MNEMONIC;
 
 module.exports = {
 
@@ -11,7 +14,7 @@ module.exports = {
     },
 
     ropsten: {
-      provider: () => new HDWalletProvider(mnemonic, `https://speedy-nodes-nyc.moralis.io/a837ce03c2d4b9c347726296/eth/ropsten/archive`),
+      provider: () => new HDWalletProvider(mnemonic, `https://speedy-nodes-nyc.moralis.io/${process.env.ROPSTEN_MORALIS_PROJECT_ID}$/eth/ropsten`),
       network_id: 3,       // Ropsten's id
       gas: 5500000,        // Ropsten has a lower block limit than mainnet
       confirmations: 2,    // # of confs to wait between deployments. (default: 0)
